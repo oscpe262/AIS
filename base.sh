@@ -17,16 +17,16 @@
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-if [[ -f `pwd`/sharedfuncs2 ]]; then
-  source sharedfuncs
+if [[ -f `pwd`/shared.sh ]]; then
+  source shared.sh
 else
-  echo "missing file: sharedfuncs"
+  echo "missing file: shared.sh"
   exit 1
 fi
 if [[ -f `pwd`/basefuncs ]]; then
-  source basefuncs
+  source basefuncs.sh
 else
-  echo "missing file: basefuncs"
+  echo "missing file: basefuncs.sh"
   exit 1
 fi
 
@@ -40,9 +40,8 @@ print_title "Arch Linux Install Script"
 print_line
 print_info "This script does not have dynamic disk setup. Make sure it is properly configured before you proceed!"
 read_input_text "Do you wish to proceed?"
-if [[ ! $OPTION == y]]; then
-  exit 1
-fi
+[[ ! $OPTION == y ]] && exit 1
+
 
 #INSTALL EDITOR
 package_install emacs
@@ -69,7 +68,7 @@ print_title "FSTAB SETUP"
 genfstab -t PARTUUID -p ${MOUNTPOINT} >> ${MOUNTPOINT}/etc/fstab
 sed -i "s/\\${MOUNTPOINT}//" ${MOUNTPOINT}/etc/fstab
 pause_function
-$EDITOR ${MOUNTPOINT}/etc/fstab
+emacs ${MOUNTPOINT}/etc/fstab # check editor set ...
 
 #HOSTNAME
 print_title "HOSTNAME/TIME SETUP"

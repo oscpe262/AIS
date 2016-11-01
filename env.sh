@@ -17,16 +17,16 @@
 #along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ################################################################################
 
-if [[ -f `pwd`/sharedfuncs2 ]]; then
-  source sharedfuncs
+if [[ -f `pwd`/shared.sh ]]; then
+  source shared.sh
 else
-  echo "missing file: sharedfuncs"
+  echo "missing file: shared.sh"
   exit 1
 fi
 if [[ -f `pwd`/envfuncs.sh ]]; then
   source envfuncs.sh
 else
-  echo "missing file: sharedfuncs"
+  echo "missing file: shared.sh"
   exit 1
 fi
 
